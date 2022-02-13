@@ -4,7 +4,7 @@ import student
 
 
 def test_simple_later():
-    input_values=['Zorp']
+    input_values=['75']
     output=[]
 
     def mock_input(s=None):
@@ -20,10 +20,10 @@ def test_simple_later():
 
     student.main()
 
-    assert "is in the last half of the alphabet" in output[1].lower()
+    assert "b" in output[1].lower()
 
-def test_simple_first():
-    input_values=['Alice']
+def test_simple_fail():
+    input_values=['30']
     output=[]
 
     def mock_input(s=None):
@@ -39,10 +39,10 @@ def test_simple_first():
 
     student.main()
 
-    assert "is in the first half of the alphabet" in output[1].lower()
+    assert "f" in output[1].lower()
 
-def test_M_name():
-    input_values=['Munich']
+def test_max():
+    input_values=['100']
     output=[]
 
     def mock_input(s=None):
@@ -58,11 +58,11 @@ def test_M_name():
 
     student.main()
 
-    assert "is in the first half of the alphabet" in output[1].lower()
+    assert "a" in output[1].lower()
 
-def test_multi_first_half():
-    for i in ["Ally","Alexander","Bruce","Lisa","Elizabeth","Kevin","Hector","Luke"]:
-        input_values=[i]
+def test_all_fail():
+    for i in range(0,49):
+        input_values=[str(i)]
         output=[]
 
         def mock_input(s=None):
@@ -78,11 +78,11 @@ def test_multi_first_half():
 
         student.main()
 
-        assert "is in the first half of the alphabet" in output[1].lower()
+        assert "f" in output[1].lower()
 
-def test_multi_last_half():
-    for i in ["Naury","Nickey","Zoey","Octavia","Prince","Queen","Rick","Steve", "Trevor", "Tristan", "Utopia", "Walter","Yussef","Xandria"]:
-        input_values=[i]
+def test_all_d():
+    for i in range(50,59):
+        input_values=[str(i)]
         output=[]
 
         def mock_input(s=None):
@@ -98,11 +98,11 @@ def test_multi_last_half():
 
         student.main()
 
-        assert "is in the last half of the alphabet" in output[1].lower()
+        assert "d" in output[1].lower()
 
-def test_multi_M_names():
-    for i in ["M", "Maury","Mickey","Money","Mona-Lisa","Mini","Mohammed","Morty","Mzzzzzzzzzz"]:
-        input_values=[i]
+def test_all_c():
+    for i in range(60,69):
+        input_values=[str(i)]
         output=[]
 
         def mock_input(s=None):
@@ -118,4 +118,45 @@ def test_multi_M_names():
 
         student.main()
 
-        assert "is in the first half of the alphabet" in output[1].lower()
+        assert "c" in output[1].lower()
+
+def test_all_b():
+    for i in range(70,79):
+        input_values=[str(i)]
+        output=[]
+
+        def mock_input(s=None):
+            if s is not None:
+                output.append(s)
+                return input_values.pop(0)
+            else:
+                output.append("")
+                return input_values.pop(0)
+        
+        student.input = mock_input
+        student.print = lambda s : output.append(s)
+
+        student.main()
+
+        assert "b" in output[1].lower()
+
+
+def test_all_a():
+    for i in range(80,99):
+        input_values=[str(i)]
+        output=[]
+
+        def mock_input(s=None):
+            if s is not None:
+                output.append(s)
+                return input_values.pop(0)
+            else:
+                output.append("")
+                return input_values.pop(0)
+        
+        student.input = mock_input
+        student.print = lambda s : output.append(s)
+
+        student.main()
+
+        assert "a" in output[1].lower()
